@@ -1,0 +1,57 @@
+body {
+	background-image: url('../images/128-168.jpg');
+	font-family: 'Noto Sans', sans-serif;
+	text-align: center;
+}
+
+.score-panel {
+	margin: auto;
+	width: 150px;
+}
+
+.lives {
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lives li {
+	display: inline-block;
+  padding-right: 4px;
+}
+
+.lives li:last-of-type {
+  padding-right: 0;
+}
+
+.score {
+	float: right;
+}
+
+.winner-wrapper {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 400px;
+	padding: 5% 15%;
+	background-color: white;
+}
+
+.btn {
+	background-color: #00bd93;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	font-size: 0.8em;
+	letter-spacing: 0.05em;
+	margin-top: 25px;
+	padding: 7px 25px;
+}
+
+.btn:hover {
+	background-color: #008668;
+	cursor: pointer;
+}
