@@ -13,6 +13,7 @@ The object of the game is guide your character across the road. You must avoid a
 
 ### Getting Started
 
+- To load the game, open index.html in your browser.
 - The character can be moved by using the up, down, left and right arrow keys.
 - If a bug is collided with, a life is lost.
 - When your character crosses the road and reaches the river, a point is gained.
