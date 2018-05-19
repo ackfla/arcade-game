@@ -1,59 +1,76 @@
-// Array of possible enemy row positions
-var yPos = [41.5, 124.5, 207.5];
-// Randomly selects object in an array
-function randomiser(arr) {
-	return arr[Math.floor(Math.random() * arr.length)]
-};
+class GameEntity {
 
-// Enemies our player must avoid
-var Enemy = function() {
-	// Variables applied to each of our instances go here,
-	// we've provided one for you to get started
-	// The image/sprite for our enemies, this uses
-	// a helper we've provided to easily load images
-	this.sprite = 'images/enemy-bug.png';
-	// X Position
-	this.x = -101;
-	// Travel speed
-	this.speed = Math.floor(Math.random() * 4) + 1;
-	// Y Position
-	this.y = randomiser(yPos);
-};
+	resetPos() {
+		this.x = this.xReset;
+		this.speed = Math.floor(Math.random() * 4) + 1;
+		this.y = this.yReset;
+	}
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-	// You should multiply any movement by the dt parameter
-	// which will ensure the game runs at the same speed for
-	// all computers.
-	this.x += 83 * dt * this.speed;
-};
-
-// Reset enemy's starting position
-Enemy.prototype.resetPos = function() {
-	this.x = -101;
-	this.speed = Math.floor(Math.random() * 4) + 1;
-	this.y = randomiser(yPos); // Randomly select starting row
 }
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-	if(this.x > 505) { // Check if off screen
-		this.resetPos(); // If off screen reset position
-	} else {
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+// Enemies our player must avoid
+class Enemy extends GameEntity {
+
+	constructor() {
+		super();
+		// Variables applied to each of our instances go here,
+		// we've provided one for you to get started
+		// The image/sprite for our enemies, this uses
+		// a helper we've provided to easily load images
+		this.sprite = 'images/enemy-bug.png';
+		// X Position
+		this.x = -101;
+		// X Reset Position
+		this.xReset = -101;
+		// Travel speed
+		this.speed = Math.floor(Math.random() * 4) + 1;
+		// Array of possible enemy row positions
+		this.yPos = [41.5, 124.5, 207.5];
+		// Y Position
+		this.y = this.randomiser(this.yPos);
+	  // Y Reset Position
+		this.yReset = this.randomiser(this.yPos);
 	}
-};
+
+	// function that randomly selects item from an array
+	randomiser(arr) {
+		return arr[Math.floor(Math.random() * arr.length)]
+	}
+
+	// Update the enemy's position, required method for game
+	// Parameter: dt, a time delta between ticks
+	update(dt) {
+		// You should multiply any movement by the dt parameter
+		// which will ensure the game runs at the same speed for
+		// all computers.
+		this.x += 83 * dt * this.speed;
+	}
+
+	// Draw the enemy on the screen, required method for game
+	render() {
+		if(this.x > 505) { // Check if off screen
+			this.resetPos(); // If off screen reset position
+		} else {
+			ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+		}
+	}
+
+}
+
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-class Player {
+class Player extends GameEntity {
 
 	constructor() {
+		super();
 		this.sprite = 'images/char-pink-girl.png';
 		this.x = 202;
+		this.xReset = 202;
 		this.y = 373.5;
+		this.yReset = 373.5;
 		this.score = 0;
 	}
 
@@ -104,12 +121,6 @@ class Player {
 	scoreAdd() {
 		this.score++; // Add 1 point
 		document.getElementById('score').innerHTML = this.score; // update score board
-	}
-
-	// Reset player position
-	resetPos() {
-		this.x = 202;
-		this.y = 373.5;
 	}
 
 	render() {
